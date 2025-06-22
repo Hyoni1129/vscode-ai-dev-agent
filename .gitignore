@@ -1,0 +1,21 @@
+# Dependencies
+**/node_modules/
+/node_modules
+
+# Compiled output
+**/out/
+/out
+
+# Testing
+**/test/
+/test
+
+# VS Code specific
+.vscode/
+*.code-workspace
+
+# Log files
+*.log
+
+# OS-specific
+.DS_Store
