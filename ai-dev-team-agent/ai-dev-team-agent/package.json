@@ -1,19 +1,45 @@
 {
   "name": "ai-dev-team-agent",
   "displayName": "AI Dev Team Agent",
-  "description": "Automated development workflow via AI Agents",
+  "description": "Automated development workflow powered by specialized AI agents",
   "version": "0.1.0",
   "publisher": "ai-dev-team",
+  "author": {
+    "name": "AI Dev Team Agent Community"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ai-dev-team-agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ai-dev-team-agent/issues"
+  },
+  "homepage": "https://github.com/yourusername/ai-dev-team-agent#readme",
+  "keywords": [
+    "ai",
+    "automation",
+    "development",
+    "workflow",
+    "agents",
+    "chat",
+    "code-generation",
+    "typescript",
+    "vscode-extension"
+  ],
   "engines": {
     "vscode": "^1.87.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Machine Learning",
+    "Programming Languages"
   ],
   "activationEvents": [
     "onChatParticipant:dev_team"
   ],
   "main": "./out/extension.js",
+  "icon": "../../Stella_VS_Code_Agent_icon.png",
   "contributes": {
     "chatParticipants": [
       {

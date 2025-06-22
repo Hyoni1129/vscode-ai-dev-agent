@@ -13,9 +13,59 @@
 # VS Code specific
 .vscode/
 *.code-workspace
+.vscode-test/
+*.vsix
 
 # Log files
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
 # OS-specific
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage
+*.lcov
+.nyc_output
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache
+.npm
+.eslintcache
+
+# Environment variables
+.env
+.env.test
+.env.production
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# IDE files
+.idea/
+
+# AI Dev Team Agent specific
+test-projects/
+temp-workspaces/
+playwright-report/
+test-results/
