@@ -45,6 +45,8 @@ export interface WorkflowContext {
     currentStep: number;
     /** Total number of steps estimated */
     totalSteps: number;
+    /** Description of the current step being executed */
+    currentStepDescription?: string;
     /** Last error message if any */
     lastError?: string;
     /** List of checkpoints for rollback capability */
