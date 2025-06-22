@@ -39,7 +39,7 @@
     "onChatParticipant:dev_team"
   ],
   "main": "./out/extension.js",
-  "icon": "../../Stella_VS_Code_Agent_icon.png",
+  "icon": "icon.png",
   "contributes": {
     "chatParticipants": [
       {
@@ -93,7 +93,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

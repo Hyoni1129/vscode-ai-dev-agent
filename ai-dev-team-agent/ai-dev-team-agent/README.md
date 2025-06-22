@@ -1,20 +1,59 @@
-# ai-dev-team-agent README
+# AI Dev Team Agent
 
-This is the README for your extension "ai-dev-team-agent". After writing up a brief description, we recommend including the following sections.
+An intelligent VS Code extension that automates development workflows using specialized AI agents. This extension provides a complete development team simulation with dedicated agents for project management, development, code testing, enhancement, and web testing.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Project Management Agent (PM)**: Creates project structures, manages tasks, and coordinates workflow
+- **Development Agent (Dev)**: Implements features, fixes bugs, and handles code development
+- **Code Tester Agent**: Analyzes code quality, runs tests, and identifies issues
+- **Enhancement Agent**: Reviews and improves code based on feedback and best practices
+- **Web Tester Agent**: Performs web-specific testing including cross-browser compatibility
 
-For example if there is an image subfolder under your extension project workspace:
+### Key Capabilities
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- Automated project setup and structure creation
+- Intelligent code generation and implementation
+- Comprehensive testing and quality assurance
+- Cross-browser web testing with Playwright
+- Continuous improvement through enhancement cycles
+- Integrated chat interface for easy interaction
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code version 1.85.0 or higher
+- Node.js for JavaScript/TypeScript projects
+- Internet connection for AI model access
+
+## Usage
+
+1. Open a workspace in VS Code
+2. Create a `Project.md` file describing your project requirements
+3. Use the chat interface with commands:
+   - `@ai-dev-team /start` - Initialize and start the development workflow
+   - `@ai-dev-team /status` - Check current workflow status
+   - `@ai-dev-team /reset` - Reset workflow state
+
+### Example Project.md
+
+```markdown
+# My Web Application
+
+## Description
+A simple task management web application with CRUD operations.
+
+## Requirements
+- HTML/CSS/JavaScript
+- Responsive design
+- Local storage for data persistence
+- Modern browser compatibility
+
+## Features
+- Add/edit/delete tasks
+- Mark tasks as complete
+- Filter tasks by status
+- Clean, modern UI
+```
 
 ## Extension Settings
 

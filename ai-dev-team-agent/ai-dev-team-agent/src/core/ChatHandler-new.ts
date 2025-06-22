@@ -9,16 +9,14 @@ import * as vscode from 'vscode';
 import { WorkflowManager } from './WorkflowManager';
 
 export class ChatHandler {
-    constructor(private workflowManager: WorkflowManager) {}
-
-    /**
+    constructor(private workflowManager: WorkflowManager) {}    /**
      * Main chat request handler
      */
     async handle(
         request: vscode.ChatRequest,
         chatContext: vscode.ChatContext,
         stream: vscode.ChatResponseStream,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.ChatResult> {
         
         try {

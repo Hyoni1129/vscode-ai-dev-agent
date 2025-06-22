@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { WorkflowContext, WorkflowCheckpoint, WorkflowState, RecoveryOptions } from '../types';
+import { WorkflowContext, WorkflowState, RecoveryOptions } from '../types';
 import { FileSystemHelper } from './fileSystem';
 
 /**
@@ -238,14 +238,12 @@ export class ErrorRecovery {
             console.error(`[ErrorRecovery] Workflow state validation failed:`, error);
             return false;
         }
-    }
-
-    private async analyzeError(
+    }    private async analyzeError(
         error: Error,
         context: WorkflowContext,
         operation: string
     ): Promise<RecoveryOptions> {
-        const errorMessage = error.message.toLowerCase();
+        error.message.toLowerCase();
 
         // Determine if retry is appropriate
         const isRetryable = this.isRetryableError(error);
@@ -287,7 +285,7 @@ export class ErrorRecovery {
         return skippableOperations.some(op => operation.toLowerCase().includes(op));
     }
 
-    private getCustomAction(error: Error, operation: string): string | undefined {
+    private getCustomAction(error: Error, _operation: string): string | undefined {
         const errorMessage = error.message.toLowerCase();
         
         if (errorMessage.includes('file not found')) {
