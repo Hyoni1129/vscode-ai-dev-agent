@@ -49,17 +49,71 @@ Added features X, Y, and Z.
 
 ---
 
-## Working with Markdown
+## 🚀 Getting Started
 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+### Prerequisites
+- VS Code 1.85.0 or higher
+- GitHub Copilot extension (for LLM access)
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
+### Installation & Usage
 
-## For more information
+1. **Load the Extension**:
+   - Press `F5` to open Extension Development Host
+   - Or package with `vsce package` and install the .vsix file
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+2. **Create a Project Description**:
+   - Create a `Project.md` file with your project requirements
+   - See `examples/Project-TaskManager-Sample.md` for reference
 
-**Enjoy!**
+3. **Start the Automated Workflow**:
+   ```
+   @ai-dev-team /start
+   ```
+
+4. **Monitor Progress**:
+   ```
+   @ai-dev-team /status
+   ```
+
+5. **Available Commands**:
+   - `/start` - Begin automated development workflow
+   - `/status` - Check current progress
+   - `/resume` - Resume interrupted workflow
+   - `/reset` - Reset workflow state
+
+### Example Workflow
+1. Create `Project.md` with your project description
+2. Open VS Code chat and type: `@ai-dev-team /start`
+3. The system will automatically:
+   - Analyze your project requirements
+   - Create development checklist
+   - Generate code files
+   - Test the implementation
+   - Suggest improvements
+   - Iterate until complete
+
+## 🛠️ Development
+
+### Building from Source
+```bash
+npm install
+npm run compile
+```
+
+### Running Tests
+```bash
+npm test
+```
+
+### Debugging
+Press `F5` to launch the extension in debug mode.
+
+---
+
+## 📚 Documentation
+
+For detailed documentation, see:
+- [Auto_Agent_Project_Workflow.md](../../Markdown/Auto_Agent_Project_Workflow.md)
+- [Enhanced_Implementation_Plan.md](../../Markdown/Enhanced_Implementation_Plan.md)
+
+**Enjoy automated development with AI agents!**

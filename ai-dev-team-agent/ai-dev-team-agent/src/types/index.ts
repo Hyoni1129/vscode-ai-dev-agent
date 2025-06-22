@@ -50,9 +50,8 @@ export interface WorkflowContext {
     /** Last error message if any */
     lastError?: string;
     /** List of checkpoints for rollback capability */
-    checkpoints: WorkflowCheckpoint[];
-    /** Additional data that agents can store */
-    data: Record<string, any>;
+    checkpoints: WorkflowCheckpoint[];    /** Additional data that agents can store */
+    data: Record<string, unknown>;
     /** Start time of the workflow */
     startTime: Date;
     /** Last update time */
@@ -90,9 +89,8 @@ export interface AgentResult {
     /** Files modified during this operation */
     filesModified?: string[];
     /** Suggested next state for the workflow */
-    nextState?: WorkflowState;
-    /** Additional data from the operation */
-    data?: any;
+    nextState?: WorkflowState;    /** Additional data from the operation */
+    data?: Record<string, unknown>;
     /** Token count used for this operation */
     tokensUsed?: number;
     /** Time taken for the operation in milliseconds */
@@ -106,13 +104,11 @@ export interface IAgent {
     /** Unique name identifier for the agent */
     name: string;
     /** Human-readable description of the agent's purpose */
-    description: string;
-    /** Execute the agent's primary function */
-    execute(context: WorkflowContext, ...args: any[]): Promise<AgentResult>;
+    description: string;    /** Execute the agent's primary function */
+    execute(context: WorkflowContext, ...args: unknown[]): Promise<AgentResult>;
     /** Validate if the agent can run in the current context */
-    canExecute(context: WorkflowContext): boolean;
-    /** Get estimated token usage for the operation */
-    estimateTokens(context: WorkflowContext, ...args: any[]): number;
+    canExecute(context: WorkflowContext): boolean;    /** Get estimated token usage for the operation */
+    estimateTokens(context: WorkflowContext, ...args: unknown[]): number;
 }
 
 /**
@@ -126,9 +122,8 @@ export interface AgentConfig {
     /** Maximum retries on failure */
     maxRetries: number;
     /** Timeout in milliseconds */
-    timeout: number;
-    /** Agent-specific configuration */
-    config: Record<string, any>;
+    timeout: number;    /** Agent-specific configuration */
+    config: Record<string, unknown>;
 }
 
 /**
@@ -164,9 +159,8 @@ export interface LLMRequest {
     /** System message (optional) */
     systemMessage?: string;
     /** Context messages for the conversation */
-    context?: string[];
-    /** Additional parameters */
-    parameters?: Record<string, any>;
+    context?: string[];    /** Additional parameters */
+    parameters?: Record<string, unknown>;
 }
 
 /**
@@ -185,6 +179,8 @@ export interface LLMResponse {
     model: string;
     /** Response timestamp */
     timestamp: string;
+    /** Response time in milliseconds */
+    responseTime?: number;
 }
 
 /**
@@ -201,6 +197,8 @@ export interface FileOperationResult {
     operation: 'read' | 'write' | 'delete' | 'exists' | 'backup' | 'restore';
     /** File size in bytes (for read/write operations) */
     size?: number;
+    /** File content (for read operations) */
+    content?: string;
 }
 
 /**
@@ -256,9 +254,8 @@ export interface WorkflowEvent {
     /** Current state */
     currentState: WorkflowState;
     /** Event message */
-    message: string;
-    /** Additional event data */
-    data?: any;
+    message: string;    /** Additional event data */
+    data?: Record<string, unknown>;
 }
 
 /**
@@ -289,4 +286,47 @@ export interface WorkflowStats {
         successCount: number;
         errorCount: number;
     }>;
+}
+
+/**
+ * Code analysis issue interface
+ */
+export interface CodeIssue {
+    /** Type of issue */
+    type: 'error' | 'warning' | 'info' | 'missing' | 'incomplete';
+    /** Issue severity */
+    severity: 'critical' | 'high' | 'medium' | 'low';
+    /** Issue category */
+    category: 'syntax' | 'logic' | 'security' | 'performance' | 'style' | 'completeness';
+    /** Human-readable message */
+    message: string;
+    /** File path where issue was found */
+    file: string;
+    /** Line number (if applicable) */
+    line?: number;
+    /** Column number (if applicable) */
+    column?: number;
+    /** Code snippet */
+    code?: string;
+    /** Suggested fix */
+    suggestion?: string;
+}
+
+/**
+ * Code analysis result interface
+ */
+export interface CodeAnalysisResult {
+    /** List of found issues */
+    issues: CodeIssue[];
+    /** Analysis summary */
+    summary: {
+        totalIssues: number;
+        criticalIssues: number;
+        warnings: number;
+        info: number;
+    };
+    /** Token usage for analysis */
+    tokensUsed: number;
+    /** Files analyzed */
+    filesAnalyzed: string[];
 }

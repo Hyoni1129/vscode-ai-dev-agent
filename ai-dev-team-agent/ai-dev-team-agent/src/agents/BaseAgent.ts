@@ -11,12 +11,10 @@ import { IAgent, AgentResult, WorkflowContext, LLMRequest, LLMResponse, FileOper
 
 export abstract class BaseAgent implements IAgent {
     abstract name: string;
-    abstract description: string;
-
-    /**
+    abstract description: string;    /**
      * Execute the agent's primary function
      */
-    abstract execute(context: WorkflowContext, ...args: any[]): Promise<AgentResult>;
+    abstract execute(context: WorkflowContext, ...args: unknown[]): Promise<AgentResult>;
 
     /**
      * Validate if the agent can run in the current context
@@ -24,12 +22,11 @@ export abstract class BaseAgent implements IAgent {
     canExecute(context: WorkflowContext): boolean {
         // Default implementation - can be overridden by subclasses
         return context.workspacePath !== undefined && context.projectPath !== undefined;
-    }
-
-    /**
+    }    /**
      * Get estimated token usage for the operation
      */
-    estimateTokens(context: WorkflowContext, ...args: any[]): number {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    estimateTokens(_context: WorkflowContext, ..._args: unknown[]): number {
         // Default estimation - can be overridden by subclasses
         return 1000;
     }
@@ -53,9 +50,7 @@ export abstract class BaseAgent implements IAgent {
                 messages.push(vscode.LanguageModelChatMessage.User(request.systemMessage));
             }
             
-            messages.push(vscode.LanguageModelChatMessage.User(request.prompt));
-
-            // Get the language model
+            messages.push(vscode.LanguageModelChatMessage.User(request.prompt));            // Get the language model
             const models = await vscode.lm.selectChatModels({ 
                 vendor: 'copilot',
                 family: model
@@ -65,19 +60,18 @@ export abstract class BaseAgent implements IAgent {
                 throw new Error(`No language model available for: ${model}`);
             }
 
-            const selectedModel = models[0];            // Send the request
+            const selectedModel = models[0];            // Send the request with updated API
             const chatResponse = await selectedModel.sendRequest(messages, {
                 justification: 'AI Dev Team Agent workflow automation'
-            });
+            }, new vscode.CancellationTokenSource().token);
 
             // Collect the response
             let content = '';
             for await (const fragment of chatResponse.text) {
                 content += fragment;
-            }
-
-            const responseTime = Date.now() - startTime;
-              return {
+            }            const responseTime = Date.now() - startTime;
+            
+            return {
                 content,
                 usage: {
                     promptTokens: this.estimateTokensUsed(request.prompt),
@@ -85,7 +79,8 @@ export abstract class BaseAgent implements IAgent {
                     totalTokens: this.estimateTokensUsed(request.prompt + content)
                 },
                 model: selectedModel.name,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                responseTime
             };
 
         } catch (error) {
@@ -99,9 +94,7 @@ export abstract class BaseAgent implements IAgent {
     private estimateTokensUsed(text: string): number {
         // Rough estimation: ~4 characters per token
         return Math.ceil(text.length / 4);
-    }
-
-    /**
+    }    /**
      * Read a file from the filesystem
      */
     protected async readFile(filePath: string): Promise<FileOperationResult> {
@@ -113,7 +106,8 @@ export abstract class BaseAgent implements IAgent {
                 success: true,
                 filePath,
                 operation: 'read',
-                size: stats.size
+                size: stats.size,
+                content
             };
         } catch (error) {
             return {

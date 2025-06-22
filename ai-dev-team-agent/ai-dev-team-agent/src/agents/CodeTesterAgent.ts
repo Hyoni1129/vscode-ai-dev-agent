@@ -10,10 +10,40 @@ import { BaseAgent } from './BaseAgent';
 import { AgentResult, WorkflowContext, WorkflowState, LLMRequest, AgentRole } from '../types';
 import { FileSystemHelper } from '../utils/fileSystem';
 
+// Local interfaces for CodeTesterAgent
+interface CodeIssue {
+    type: string;
+    severity: string;
+    category: string;
+    message: string;
+    file: string;
+    line?: number;
+    column?: number;
+    code?: string;
+    suggestion?: string;
+}
+
+interface AnalysisData {
+    issues: CodeIssue[];
+    summary?: string | {
+        totalIssues: number;
+        criticalIssues: number;
+        warnings: number;
+        info: number;
+    };
+    tokensUsed?: number;
+    filesAnalyzed?: string[];
+    filePath?: string;
+    [key: string]: unknown;
+}
+
 export class CodeTesterAgent extends BaseAgent {
     name = 'Code Tester Agent';
     description = 'Analyzes code for errors, completeness, and quality';
-    protected role = AgentRole.CODE_TESTER;    async execute(context: WorkflowContext, ...args: any[]): Promise<AgentResult> {
+    protected role = AgentRole.CODE_TESTER;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async execute(context: WorkflowContext, ..._args: unknown[]): Promise<AgentResult> {
         try {
             // Basic context validation
             if (!context.workspacePath || !context.projectPath) {
@@ -30,14 +60,13 @@ export class CodeTesterAgent extends BaseAgent {
             }
 
             // Generate comprehensive test report
-            const reportResult = await this.generateTestReport(context, analysisResult.data);
+            const reportResult = await this.generateTestReport(context, analysisResult.data as AnalysisData);
             
             if (!reportResult.success) {
                 return reportResult;
-            }
-
-            // Determine next workflow state based on findings
-            const hasIssues = analysisResult.data.issues && analysisResult.data.issues.length > 0;
+            }            // Determine next workflow state based on findings
+            const analysisData = analysisResult.data as { issues?: unknown[]; tokensUsed?: number } | undefined;
+            const hasIssues = analysisData?.issues && Array.isArray(analysisData.issues) && analysisData.issues.length > 0;
             const nextState = hasIssues ? WorkflowState.BugFixing : WorkflowState.ReadyForEnhancement;
 
             return this.createSuccessResult(
@@ -48,8 +77,8 @@ export class CodeTesterAgent extends BaseAgent {
                     filesCreated: reportResult.filesCreated,
                     nextState,
                     data: { 
-                        issuesFound: analysisResult.data.issues?.length || 0,
-                        tokensUsed: (analysisResult.data.tokensUsed || 0) + (reportResult.data?.tokensUsed || 0)
+                        issuesFound: Array.isArray(analysisData?.issues) ? analysisData.issues.length : 0,
+                        tokensUsed: (analysisData?.tokensUsed || 0) + ((reportResult.data as { tokensUsed?: number })?.tokensUsed || 0)
                     }
                 }
             );
@@ -67,7 +96,7 @@ export class CodeTesterAgent extends BaseAgent {
             const projectFiles = await this.findProjectFiles(context.workspacePath);
             this.log(`Found ${projectFiles.length} files to analyze`);
 
-            const issues: any[] = [];
+            const issues: CodeIssue[] = [];
             let totalTokensUsed = 0;
 
             // Analyze each file
@@ -94,7 +123,8 @@ export class CodeTesterAgent extends BaseAgent {
         }
     }
 
-    private async findProjectFiles(workspacePath: string): Promise<string[]> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    private async findProjectFiles(_workspacePath: string): Promise<string[]> {
         const patterns = [
             '**/*.js',
             '**/*.ts',
@@ -119,7 +149,8 @@ export class CodeTesterAgent extends BaseAgent {
         for (const pattern of patterns) {
             try {                const files = await FileSystemHelper.findFiles(pattern, `{${excludePatterns.join(',')}}`);
                 allFiles.push(...files);
-            } catch (error) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (_error) {
                 this.log(`Warning: Could not find files with pattern ${pattern}`, 'warn');
             }
         }
@@ -128,7 +159,8 @@ export class CodeTesterAgent extends BaseAgent {
         return [...new Set(allFiles)];
     }
 
-    private async analyzeFile(filePath: string, context: WorkflowContext): Promise<any> {        try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    private async analyzeFile(filePath: string, _context: WorkflowContext): Promise<AnalysisData> {        try {
             const fileContent = await FileSystemHelper.readFile(filePath);
             const fileExtension = FileSystemHelper.getFileExtension(filePath);
             const fileName = FileSystemHelper.getFileName(filePath);
@@ -175,14 +207,15 @@ Format your response as JSON with this structure:
                     issues: analysis.issues || [],
                     summary: analysis.summary,
                     tokensUsed: response.usage?.totalTokens || 0
-                };
-            } catch (parseError) {
+                };            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (_parseError) {
                 // If JSON parsing fails, treat the whole response as a single issue
                 return {
                     filePath,
                     issues: [{
                         type: 'warning',
                         category: 'analysis',
+                        file: filePath,
                         line: 0,
                         message: `Analysis response could not be parsed: ${response.content.substring(0, 200)}...`,
                         severity: 'medium',
@@ -199,6 +232,7 @@ Format your response as JSON with this structure:
                 issues: [{
                     type: 'error',
                     category: 'analysis',
+                    file: filePath,
                     line: 0,
                     message: `Failed to analyze file: ${error instanceof Error ? error.message : 'Unknown error'}`,
                     severity: 'high',
@@ -210,15 +244,15 @@ Format your response as JSON with this structure:
         }
     }
 
-    private async checkCompleteness(context: WorkflowContext): Promise<any> {
+    private async checkCompleteness(context: WorkflowContext): Promise<AnalysisData> {
         try {
             const checklistPath = path.join(context.workspacePath, 'Dev_Checklist.md');
-            
-            if (!(await FileSystemHelper.fileExists(checklistPath))) {
+              if (!(await FileSystemHelper.fileExists(checklistPath))) {
                 return {
                     issues: [{
                         type: 'warning',
                         category: 'completeness',
+                        file: checklistPath,
                         line: 0,
                         message: 'Dev_Checklist.md not found - cannot verify completeness',
                         severity: 'medium',
@@ -226,7 +260,7 @@ Format your response as JSON with this structure:
                     }],
                     tokensUsed: 0
                 };
-            }            const checklistContent = await FileSystemHelper.readFile(checklistPath);
+            }const checklistContent = await FileSystemHelper.readFile(checklistPath);
             const projectContent = await FileSystemHelper.readFile(context.projectPath);
 
             const request: LLMRequest = {
@@ -270,12 +304,13 @@ Respond in JSON format:
                     completenessScore: analysis.completeness_score,
                     summary: analysis.summary,
                     tokensUsed: response.usage?.totalTokens || 0
-                };
-            } catch (parseError) {
+                };            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (_parseError) {
                 return {
                     issues: [{
                         type: 'warning',
                         category: 'completeness',
+                        file: checklistPath,
                         message: 'Could not parse completeness analysis',
                         severity: 'low',
                         suggestion: 'Review project completeness manually'
@@ -289,6 +324,7 @@ Respond in JSON format:
                 issues: [{
                     type: 'error',
                     category: 'completeness',
+                    file: context.projectPath,
                     message: `Completeness check failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
                     severity: 'medium',
                     suggestion: 'Review project completeness manually'
@@ -298,7 +334,7 @@ Respond in JSON format:
         }
     }
 
-    private async generateTestReport(context: WorkflowContext, analysisData: any): Promise<AgentResult> {
+    private async generateTestReport(context: WorkflowContext, analysisData: AnalysisData): Promise<AgentResult> {
         try {
             const issues = analysisData.issues || [];
             const reportPath = path.join(context.workspacePath, 'Code_Tester_Report.md');
@@ -349,9 +385,7 @@ ${this.generateRecommendationsSection(issues)}
         } catch (error) {
             return this.createErrorResult(`Failed to generate test report: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
-    }
-
-    private groupIssuesByCategory(issues: any[]): Record<string, any[]> {
+    }    private groupIssuesByCategory(issues: CodeIssue[]): Record<string, CodeIssue[]> {
         return issues.reduce((groups, issue) => {
             const category = issue.category || 'other';
             if (!groups[category]) {
@@ -359,10 +393,8 @@ ${this.generateRecommendationsSection(issues)}
             }
             groups[category].push(issue);
             return groups;
-        }, {});
-    }
-
-    private groupIssuesBySeverity(issues: any[]): Record<string, any[]> {
+        }, {} as Record<string, CodeIssue[]>);
+    }    private groupIssuesBySeverity(issues: CodeIssue[]): Record<string, CodeIssue[]> {
         return issues.reduce((groups, issue) => {
             const severity = issue.severity || 'low';
             if (!groups[severity]) {
@@ -370,10 +402,10 @@ ${this.generateRecommendationsSection(issues)}
             }
             groups[severity].push(issue);
             return groups;
-        }, {});
+        }, {} as Record<string, CodeIssue[]>);
     }
 
-    private generateSummarySection(issuesBySeverity: Record<string, any[]>): string {
+    private generateSummarySection(issuesBySeverity: Record<string, CodeIssue[]>): string {
         const severityOrder = ['critical', 'high', 'medium', 'low'];
         let summary = '';
 
@@ -393,7 +425,7 @@ ${this.generateRecommendationsSection(issues)}
         return summary || '✅ No issues found';
     }
 
-    private generateCategorySection(issuesByCategory: Record<string, any[]>): string {
+    private generateCategorySection(issuesByCategory: Record<string, CodeIssue[]>): string {
         let content = '';
 
         for (const [category, categoryIssues] of Object.entries(issuesByCategory)) {
@@ -416,7 +448,7 @@ ${this.generateRecommendationsSection(issues)}
         return content || 'No issues found by category.';
     }
 
-    private generateCriticalIssuesSection(issues: any[]): string {
+    private generateCriticalIssuesSection(issues: CodeIssue[]): string {
         const criticalIssues = issues.filter(issue => 
             issue.severity === 'critical' || issue.severity === 'high'
         );
@@ -428,7 +460,7 @@ ${this.generateRecommendationsSection(issues)}
         let content = '';
         for (const issue of criticalIssues) {
             content += `### ${issue.message}\n\n`;
-            content += `**File**: ${issue.filePath || 'Unknown'}\n`;
+            content += `**File**: ${issue.file || 'Unknown'}\n`;
             content += `**Line**: ${issue.line || 'N/A'}\n`;
             content += `**Severity**: ${issue.severity?.toUpperCase() || 'UNKNOWN'}\n`;
             content += `**Category**: ${issue.category || 'other'}\n\n`;
@@ -443,25 +475,23 @@ ${this.generateRecommendationsSection(issues)}
         return content;
     }
 
-    private generateDetailedIssuesSection(issues: any[]): string {
+    private generateDetailedIssuesSection(issues: CodeIssue[]): string {
         if (issues.length === 0) {
             return '✅ No detailed issues to report.';
-        }
-
-        let content = '';
+        }        let content = '';
         const groupedByFile = issues.reduce((groups, issue) => {
-            const file = issue.filePath || 'Unknown File';
+            const file = issue.file || 'Unknown File';
             if (!groups[file]) {
                 groups[file] = [];
             }
             groups[file].push(issue);
             return groups;
-        }, {});
+        }, {} as Record<string, CodeIssue[]>);
 
         for (const [filePath, fileIssues] of Object.entries(groupedByFile)) {
             content += `### ${path.basename(filePath)}\n\n`;
             
-            for (const issue of (fileIssues as any[])) {                const severityEmoji = {
+            for (const issue of fileIssues) {const severityEmoji = {
                     critical: '🔴',
                     high: '🟠',
                     medium: '🟡',
@@ -479,7 +509,7 @@ ${this.generateRecommendationsSection(issues)}
         return content;
     }
 
-    private generateRecommendationsSection(issues: any[]): string {
+    private generateRecommendationsSection(issues: CodeIssue[]): string {
         const recommendations = new Set<string>();
 
         // Generate general recommendations based on issue patterns

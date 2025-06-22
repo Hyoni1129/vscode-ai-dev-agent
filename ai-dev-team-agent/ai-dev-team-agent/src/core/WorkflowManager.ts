@@ -6,7 +6,6 @@
  */
 
 import * as vscode from 'vscode';
-import * as path from 'path';
 import { 
     WorkflowState, 
     WorkflowContext, 
@@ -202,7 +201,7 @@ export class WorkflowManager {
                     this.context.lastUpdate = new Date();
                     this.persistState();
                     this.emitStateChange(this.context.state);
-                    this.emitEvent('state_change', `Transitioned from ${previousState} to ${this.context.state}`, result);
+                    this.emitEvent('state_change', `Transitioned from ${previousState} to ${this.context.state}`);
                 }
 
                 // Update progress
@@ -400,7 +399,7 @@ export class WorkflowManager {
             this.stats.checkpointsCreated++;
         }
 
-        this.emitEvent('checkpoint', `Checkpoint created: ${checkpoint.description}`, checkpoint);
+        this.emitEvent('checkpoint', `Checkpoint created: ${checkpoint.description}`);
     }
 
     /**
@@ -487,7 +486,7 @@ export class WorkflowManager {
     /**
      * Emit workflow event
      */
-    private emitEvent(type: WorkflowEvent['type'], message: string, data?: any) {
+    private emitEvent(type: WorkflowEvent['type'], message: string, data?: Record<string, unknown>) {
         const event: WorkflowEvent = {
             timestamp: new Date(),
             type,

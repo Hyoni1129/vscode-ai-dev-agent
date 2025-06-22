@@ -15,12 +15,12 @@ export class ChatHandler {
 
     /**
      * Main chat request handler
-     */
-    async handle(
+     */    async handle(
         request: vscode.ChatRequest,
         chatContext: vscode.ChatContext,
         stream: vscode.ChatResponseStream,
-        token: vscode.CancellationToken
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        _token: vscode.CancellationToken
     ): Promise<vscode.ChatResult> {
         
         try {

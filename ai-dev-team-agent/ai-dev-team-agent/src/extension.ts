@@ -5,6 +5,7 @@
 import * as vscode from 'vscode';
 import { WorkflowManager } from './core/WorkflowManager';
 import { ChatHandler } from './core/ChatHandler';
+import { ProgressInfo } from './types';
 
 let workflowManager: WorkflowManager;
 
@@ -19,11 +20,18 @@ export function activate(context: vscode.ExtensionContext) {
         workflowManager = new WorkflowManager(context);
 
         // Create chat handler
-        const chatHandler = new ChatHandler(workflowManager);
-
-        // Register chat participant
+        const chatHandler = new ChatHandler(workflowManager);        // Register chat participant
         const participant = vscode.chat.createChatParticipant('dev_team', chatHandler.handle.bind(chatHandler));
         participant.iconPath = new vscode.ThemeIcon('organization');
+        
+        // Set up participant follow-up provider
+        participant.followupProvider = {
+            provideFollowups: () => [{
+                prompt: 'Get started with automated development workflow',
+                label: 'Start workflow',
+                command: 'start'
+            }]
+        };
 
         // Add status bar item
         const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
@@ -37,10 +45,8 @@ export function activate(context: vscode.ExtensionContext) {
             const stateDisplay = state.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
             statusBarItem.text = `$(robot) AI Dev Team: ${stateDisplay}`;
             statusBarItem.tooltip = `AI Dev Team Agent - Current state: ${stateDisplay}`;
-        });
-
-        // Update status bar on progress changes
-        workflowManager.onProgressChange((progress: any) => {
+        });        // Update status bar on progress changes
+        workflowManager.onProgressChange((progress: ProgressInfo) => {
             statusBarItem.text = `$(robot) AI Dev Team: ${progress.currentOperation} (${progress.percentage}%)`;
             statusBarItem.tooltip = `AI Dev Team Agent - ${progress.currentOperation}\nProgress: ${progress.currentStep}/${progress.totalSteps} (${progress.percentage}%)`;
         });
