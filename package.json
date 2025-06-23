@@ -39,7 +39,7 @@
     "onChatParticipant:dev_team"
   ],
   "main": "./out/extension.js",
-  "icon": "icon.png",
+  "icon": "Stella_VS_Code_Agent_icon.png",
   "contributes": {
     "chatParticipants": [
       {
