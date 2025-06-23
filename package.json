@@ -28,7 +28,7 @@
     "vscode-extension"
   ],
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.87.0"
   },
   "categories": [
     "Other",
@@ -36,14 +36,15 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onChatParticipant:dev_team"
+    "onChatParticipant:ai-dev-team",
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "icon": "Stella_VS_Code_Agent_icon.png",
   "contributes": {
     "chatParticipants": [
       {
-        "id": "dev_team",
+        "id": "ai-dev-team",
         "name": "ai-dev-team",
         "description": "AI Agent-based automated development workflow",
         "commands": [
@@ -103,7 +104,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
-    "@types/vscode": "^1.85.0",
+    "@types/vscode": "^1.87.0",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
     "@typescript-eslint/parser": "^8.34.1",
     "@vscode/test-cli": "^0.0.10",

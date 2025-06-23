@@ -20,8 +20,11 @@ export class ChatHandler {
         chatContext: vscode.ChatContext,
         stream: vscode.ChatResponseStream,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        _token: vscode.CancellationToken
-    ): Promise<vscode.ChatResult> {
+        _token: vscode.CancellationToken    ): Promise<vscode.ChatResult> {
+          console.log('🔍 ChatHandler.handle called with:', {
+            command: request.command,
+            prompt: request.prompt
+        });
         
         try {
             switch (request.command) {
@@ -39,9 +42,9 @@ export class ChatHandler {
                 
                 default:
                     return await this.handleDefault(stream);
-            }
-        } catch (error) {
+            }        } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+            console.error('❌ ChatHandler error:', error);
             stream.markdown(`❌ **Error**: ${errorMessage}`);
             return { errorDetails: { message: errorMessage } };
         }
@@ -217,8 +220,9 @@ export class ChatHandler {
 
     /**
      * Handle default case (no command or help)
-     */
-    private async handleDefault(stream: vscode.ChatResponseStream): Promise<vscode.ChatResult> {
+     */    private async handleDefault(stream: vscode.ChatResponseStream): Promise<vscode.ChatResult> {
+        console.log('🔍 handleDefault called - chat participant is working!');
+        
         const helpText = `# 🤖 AI Dev Team Agent
 
 **Automated development workflow powered by specialized AI agents**
@@ -229,7 +233,12 @@ export class ChatHandler {
 - \`/status\` - Check current workflow status
 - \`/reset\` - Reset workflow state
 
-*This is a work-in-progress extension. Full functionality coming soon!*`;
+*Chat participant is active and responding! Extension is loaded correctly.*
+
+## Debug Info
+- Extension activated successfully
+- Chat participant registered with ID: ai-dev-team
+- Use \`@ai-dev-team\` to interact with this agent`;
         
         stream.markdown(helpText);
         return {};
