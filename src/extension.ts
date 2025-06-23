@@ -46,7 +46,17 @@ export function activate(context: vscode.ExtensionContext) {
                 label: 'Start workflow',
                 command: 'start'
             }]
-        };        // Add status bar item
+        };
+        
+        // Test if chat participant is accessible
+        setTimeout(() => {
+            console.log('🔍 Testing chat participant availability...');
+            vscode.commands.executeCommand('workbench.action.chat.open').then(() => {
+                console.log('✅ Chat panel opened successfully');
+            }, (err: unknown) => {
+                console.log('❌ Failed to open chat panel:', err);
+            });
+        }, 2000);        // Add status bar item
         const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
         statusBarItem.text = "$(robot) @ai-dev-team: Ready";
         statusBarItem.tooltip = "AI Dev Team Agent - Use @ai-dev-team in chat to interact";
@@ -63,6 +73,16 @@ export function activate(context: vscode.ExtensionContext) {
         workflowManager.onProgressChange((progress: ProgressInfo) => {
             statusBarItem.text = `$(robot) @ai-dev-team: ${progress.currentOperation} (${progress.percentage}%)`;
             statusBarItem.tooltip = `AI Dev Team Agent - ${progress.currentOperation}\nProgress: ${progress.currentStep}/${progress.totalSteps} (${progress.percentage}%)\nUse @ai-dev-team in chat to interact`;
+        });
+
+        // Show notification to user about successful activation
+        vscode.window.showInformationMessage(
+            '🤖 AI Dev Team Agent is ready! Use @ai-dev-team in chat to get started.',
+            'Open Chat'
+        ).then(selection => {
+            if (selection === 'Open Chat') {
+                vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
+            }
         });
 
         console.log('✅ AI Dev Team Agent activated successfully');
