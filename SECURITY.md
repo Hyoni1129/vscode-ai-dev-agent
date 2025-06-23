@@ -11,7 +11,7 @@
 We take the security of AI Dev Team Agent seriously. If you believe you've found a security vulnerability, please follow these steps:
 
 1. **Do not disclose the vulnerability publicly**
-2. **Email us at [security@example.com](mailto:security@example.com)** with details about the vulnerability
+2. **Email us at [team.stella.global@gmail.com](mailto:team.stella.global@gmail.com)** with details about the vulnerability
 3. Include the following information:
    - Type of issue
    - Full paths of source files related to the issue
