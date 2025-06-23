@@ -1,5 +1,12 @@
 /**
  * AI Dev Team Agent - Extension Entry Point
+ * 
+ * Copyright (c) 2025 JEONGHAN LEE
+ * 
+ * This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * 
+ * Part of the Stella Open Source Project
  */
 
 import * as vscode from 'vscode';
@@ -26,8 +33,21 @@ export function activate(context: vscode.ExtensionContext) {
         const chatHandler = new ChatHandler(workflowManager);
         console.log('✅ ChatHandler created');        // Register chat participant
         console.log('Registering chat participant with ID: ai-dev-team');
+        
+        // Ensure GitHub Copilot Chat is available
+        if (!vscode.extensions.getExtension('github.copilot-chat')) {
+            const errorMsg = 'GitHub Copilot Chat extension is required for AI Dev Team Agent to work.';
+            console.error('❌', errorMsg);
+            vscode.window.showErrorMessage(errorMsg, 'Install GitHub Copilot Chat').then(selection => {
+                if (selection) {
+                    vscode.commands.executeCommand('workbench.extensions.search', 'github.copilot-chat');
+                }
+            });
+            throw new Error(errorMsg);
+        }
+        
         const participant = vscode.chat.createChatParticipant('ai-dev-team', chatHandler.handle.bind(chatHandler));
-        participant.iconPath = new vscode.ThemeIcon('organization');
+        participant.iconPath = new vscode.ThemeIcon('robot');
         console.log('✅ Chat participant registered');
         
         // Verify participant is registered
@@ -51,11 +71,34 @@ export function activate(context: vscode.ExtensionContext) {
         // Test if chat participant is accessible
         setTimeout(() => {
             console.log('🔍 Testing chat participant availability...');
-            vscode.commands.executeCommand('workbench.action.chat.open').then(() => {
-                console.log('✅ Chat panel opened successfully');
-            }, (err: unknown) => {
-                console.log('❌ Failed to open chat panel:', err);
-            });
+            
+            // Try multiple commands to open chat
+            const chatCommands = [
+                'workbench.action.chat.open',
+                'workbench.panel.chat.view.copilot.focus',
+                'workbench.action.chat.openInSidebar'
+            ];
+            
+            let commandIndex = 0;
+            const tryNextCommand = () => {
+                if (commandIndex < chatCommands.length) {
+                    const cmd = chatCommands[commandIndex++];
+                    console.log(`Trying command: ${cmd}`);
+                    vscode.commands.executeCommand(cmd).then(() => {
+                        console.log(`✅ Command ${cmd} executed successfully`);
+                    }, (err: unknown) => {
+                        console.log(`❌ Command ${cmd} failed:`, err);
+                        tryNextCommand();
+                    });
+                }
+            };
+            
+            tryNextCommand();
+            
+            // Also try to get all available chat participants
+            console.log('🔍 Checking if participant is accessible via direct test...');
+            // We'll test this by trying to trigger our handler directly
+            
         }, 2000);        // Add status bar item
         const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
         statusBarItem.text = "$(robot) @ai-dev-team: Ready";
@@ -78,10 +121,12 @@ export function activate(context: vscode.ExtensionContext) {
         // Show notification to user about successful activation
         vscode.window.showInformationMessage(
             '🤖 AI Dev Team Agent is ready! Use @ai-dev-team in chat to get started.',
-            'Open Chat'
+            'Open Chat', 'Reload Window'
         ).then(selection => {
             if (selection === 'Open Chat') {
                 vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
+            } else if (selection === 'Reload Window') {
+                vscode.commands.executeCommand('workbench.action.reloadWindow');
             }
         });
 

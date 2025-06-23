@@ -26,6 +26,21 @@ export class ChatHandler {
             prompt: request.prompt
         });
         
+        // Add a greeting message for first-time users
+        if (!request.command && !request.prompt.trim()) {
+            stream.markdown("👋 **Welcome to AI Dev Team Agent!**\n\n");
+            stream.markdown("I help you build complete projects with automated AI workflows.\n\n");
+            stream.markdown("**Available Commands:**\n");
+            stream.markdown("- `/start` - Begin automated development workflow\n");
+            stream.markdown("- `/status` - Check current workflow progress\n");
+            stream.markdown("- `/resume` - Resume interrupted workflow\n");
+            stream.markdown("- `/reset` - Reset workflow and start fresh\n\n");
+            stream.markdown("**To get started:**\n");
+            stream.markdown("1. Create a `Project.md` file in your workspace with your project description\n");
+            stream.markdown("2. Use `/start` to begin the automated workflow\n");
+            return {};
+        }
+        
         try {
             switch (request.command) {
                 case 'start':

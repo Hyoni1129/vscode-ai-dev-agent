@@ -5,17 +5,18 @@
   "version": "0.1.0",
   "publisher": "ai-dev-team",
   "author": {
-    "name": "AI Dev Team Agent Community"
+    "name": "JEONGHAN LEE",
+    "email": "Team.Stella.Global@gmail.com"
   },
-  "license": "MIT",
+  "license": "CC BY-NC-SA 4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hyoni1129/vscode-ai-dev-agent.git"
+    "url": "https://github.com/JeongHanLee/VSCODE_Agent_Extension.git"
   },
   "bugs": {
-    "url": "https://github.com/Hyoni1129/vscode-ai-dev-agent/issues"
+    "url": "https://github.com/JeongHanLee/VSCODE_Agent_Extension/issues"
   },
-  "homepage": "https://github.com/Hyoni1129/vscode-ai-dev-agent#readme",
+  "homepage": "https://github.com/JeongHanLee/VSCODE_Agent_Extension#readme",
   "keywords": [
     "ai",
     "automation",
@@ -35,9 +36,14 @@
     "Machine Learning",
     "Programming Languages"
   ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "extensionDependencies": [
+    "github.copilot-chat"
+  ],
   "activationEvents": [
-    "onChatParticipant:ai-dev-team",
-    "onStartupFinished"
+    "onChatParticipant:ai-dev-team"
   ],
   "main": "./out/extension.js",
   "icon": "Stella_VS_Code_Agent_icon.png",
@@ -46,7 +52,9 @@
       {
         "id": "ai-dev-team",
         "name": "ai-dev-team",
-        "description": "AI Agent-based automated development workflow",
+        "fullName": "AI Development Team Agent",
+        "description": "AI Agent-based automated development workflow - Use @ai-dev-team to get started",
+        "isSticky": true,
         "commands": [
           {
             "name": "start",
