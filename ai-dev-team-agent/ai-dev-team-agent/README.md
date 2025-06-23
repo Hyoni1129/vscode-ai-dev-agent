@@ -152,7 +152,8 @@ Press `F5` to launch the extension in debug mode.
 ## 📚 Documentation
 
 For detailed documentation, see:
-- [Auto_Agent_Project_Workflow.md](../../Markdown/Auto_Agent_Project_Workflow.md)
-- [Enhanced_Implementation_Plan.md](../../Markdown/Enhanced_Implementation_Plan.md)
+- [User Guide](docs/guides/user-guide.md)
+- [API Documentation](docs/api/README.md)
+- [Development Guide](docs/DEVELOPMENT.md)
 
 **Enjoy automated development with AI agents!**
