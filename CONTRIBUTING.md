@@ -31,8 +31,8 @@ This project and everyone participating in it is governed by our Code of Conduct
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/yourusername/ai-dev-team-agent.git
-   cd ai-dev-team-agent
+   git clone https://github.com/Hyoni1129/vscode-ai-dev-agent.git
+   cd vscode-ai-dev-agent
    ```
 
 2. **Install dependencies**
@@ -53,7 +53,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 
 ### 🐛 Bug Reports
 
-Before creating bug reports, please check the [issue list](https://github.com/yourusername/ai-dev-team-agent/issues) to see if the problem has already been reported.
+Before creating bug reports, please check the [issue list](https://github.com/Hyoni1129/vscode-ai-dev-agent/issues) to see if the problem has already been reported.
 
 When creating a bug report, include these details:
 

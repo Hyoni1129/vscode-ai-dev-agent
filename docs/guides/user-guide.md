@@ -1,6 +1,6 @@
-# AI Dev Team Agent User Guide
+# VS Code AI Dev Agent User Guide
 
-This guide provides detailed instructions on how to use the AI Dev Team Agent extension effectively.
+This guide provides detailed instructions on how to use the VS Code AI Dev Agent extension effectively.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ This guide provides detailed instructions on how to use the AI Dev Team Agent ex
 1. Install the extension from the VS Code Marketplace
 2. Alternatively, download the VSIX file and install it manually:
    ```
-   code --install-extension ai-dev-team-agent-0.1.0.vsix
+   code --install-extension vscode-ai-dev-agent-0.1.0.vsix
    ```
 
 ### Setting Up Your Project
@@ -43,7 +43,7 @@ A clear description of what your project does.
 
 ## Using the Chat Interface
 
-The AI Dev Team Agent is accessible through VS Code's chat interface:
+The VS Code AI Dev Agent is accessible through VS Code's chat interface:
 
 ### Starting a Workflow
 
@@ -71,7 +71,7 @@ If you need to start over:
 
 ## Understanding the Workflow
 
-The AI Dev Team Agent follows this process:
+The VS Code AI Dev Agent follows this process:
 
 1. **Project Analysis**: The PM Agent analyzes your project requirements
 2. **Planning**: Tasks are identified and organized

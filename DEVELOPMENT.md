@@ -4,8 +4,8 @@
 
 ### 1. Clone and Setup
 ```bash
-git clone https://github.com/yourusername/ai-dev-team-agent.git
-cd ai-dev-team-agent/ai-dev-team-agent/ai-dev-team-agent
+git clone https://github.com/Hyoni1129/vscode-ai-dev-agent.git
+cd vscode-ai-dev-agent
 npm install
 ```
 

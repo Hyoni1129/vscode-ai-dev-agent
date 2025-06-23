@@ -40,9 +40,8 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - name: Package Extension
-      run: npx @vscode/vsce package
-    - name: Upload VSIX
+      run: npx @vscode/vsce package    - name: Upload VSIX
       uses: actions/upload-artifact@v3
       with:
-        name: ai-dev-team-agent
+        name: vscode-ai-dev-agent
         path: "*.vsix"

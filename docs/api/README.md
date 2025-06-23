@@ -1,6 +1,6 @@
-# AI Dev Team Agent API
+# VS Code AI Dev Agent API
 
-This document provides an overview of the public API exposed by the AI Dev Team Agent extension.
+This document provides an overview of the public API exposed by the VS Code AI Dev Agent extension.
 
 ## Core APIs
 

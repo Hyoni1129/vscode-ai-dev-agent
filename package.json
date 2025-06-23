@@ -10,12 +10,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/ai-dev-team-agent.git"
+    "url": "https://github.com/Hyoni1129/vscode-ai-dev-agent.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/ai-dev-team-agent/issues"
+    "url": "https://github.com/Hyoni1129/vscode-ai-dev-agent/issues"
   },
-  "homepage": "https://github.com/yourusername/ai-dev-team-agent#readme",
+  "homepage": "https://github.com/Hyoni1129/vscode-ai-dev-agent#readme",
   "keywords": [
     "ai",
     "automation",

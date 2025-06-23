@@ -1,4 +1,4 @@
-# Enhanced Implementation Plan: AI Dev Team VS Code Extension
+# Enhanced Implementation Plan: VS Code AI Dev Agent Extension
 
 ## Overview
 This document provides an improved implementation strategy for building the AI Agent-Based Automated Development Workflow as a VS Code extension using the Chat Participant API.
@@ -38,8 +38,8 @@ npm install playwright # For web testing agent
 #### Enhanced Package.json
 ```json
 {
-  "name": "ai-dev-team-agent",
-  "displayName": "AI Dev Team Agent",
+  "name": "vscode-ai-dev-agent",
+  "displayName": "VS Code AI Dev Agent",
   "description": "Automated development workflow via AI Agents",
   "version": "0.1.0",
   "publisher": "your-publisher-name",
