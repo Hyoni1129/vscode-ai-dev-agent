@@ -1,4 +1,4 @@
-﻿# 🤖 AI Dev Team Agent
+# 🤖 AI Dev Team Agent
 
 <div align="center">
   <img src="Stella_VS_Code_Agent_icon.png" alt="AI Dev Team Agent" width="120" height="120">
