@@ -1,167 +1,204 @@
+# 🤖 AI Dev Team Agent
+
 <div align="center">
-  <img src="Stella_VS_Code_Agent_icon.png" alt="AI Dev Team Agent" width="128" height="128">
+  <img src="Stella_VS_Code_Agent_icon.png" alt="AI Dev Team Agent" width="120" height="120">
   
-  # AI Dev Team Agent
+  **Automated Development Workflow Powered by AI Agents**
   
-  **Automated Development Workflow powered by Specialized AI Agents**
-  
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-  [![VS Code Extension](https://img.shields.io/badge/VS%20Code-Extension-blue.svg)](https://marketplace.visualstudio.com/vscode)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)  [![GitHub Issues](https://img.shields.io/github/issues/Hyoni1129/vscode-ai-dev-agent)](https://github.com/Hyoni1129/vscode-ai-dev-agent/issues)
-  [![GitHub Stars](https://img.shields.io/github/stars/Hyoni1129/vscode-ai-dev-agent)](https://github.com/Hyoni1129/vscode-ai-dev-agent/stargazers)
+  [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/yourusername/ai-dev-team-agent)
+  [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+  [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-007ACC.svg?logo=visual-studio-code)](https://code.visualstudio.com/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.3.0-blue.svg?logo=typescript)](https://www.typescriptlang.org/)
 </div>
 
 ---
 
 ## 🚀 Overview
 
-AI Dev Team Agent is an intelligent VS Code extension that revolutionizes development workflows by simulating a complete development team using specialized AI agents. Transform your development process with automated project management, intelligent code generation, comprehensive testing, and continuous improvement cycles.
+AI Dev Team Agent is a revolutionary VS Code extension that automates the entire software development workflow using specialized AI agents. From project planning to code generation, testing, and enhancement - let AI handle the heavy lifting while you focus on the big picture.
 
 ### ✨ Key Features
 
-- **🎯 Project Management Agent (PM)**: Analyzes requirements, creates project structures, and coordinates workflows
-- **👨‍💻 Development Agent (Dev)**: Implements features, fixes bugs, and handles code development with best practices
-- **🧪 Code Tester Agent**: Performs comprehensive code analysis, runs tests, and identifies quality issues
-- **🔧 Enhancement Agent**: Reviews and improves code based on feedback and industry standards
-- **🌐 Web Tester Agent**: Conducts web-specific testing including cross-browser compatibility with Playwright
-- **💬 Integrated Chat Interface**: Seamless interaction through VS Code's chat interface
-
-### 🎥 Demo
-
-![AI Dev Team Agent Demo](docs/assets/demo.gif)
+- 🎯 **Fully Automated Workflow** - Complete project generation from a simple description
+- 🧠 **Multi-Agent System** - Specialized AI agents for different development phases
+- 💬 **Chat Interface** - Easy interaction through VS Code's chat participant API
+- 📊 **Real-time Progress** - Visual progress tracking with detailed status updates
+- 🔄 **State Persistence** - Resume workflows after VS Code restarts
+- 🛡️ **Error Recovery** - Robust error handling with automatic retries
+- 📁 **Multi-format Support** - HTML, CSS, JavaScript, TypeScript, and more
 
 ---
 
-## 📋 Table of Contents
+## 🎬 Demo
 
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Features](#-features)
-- [Commands](#-commands)
-- [Configuration](#-configuration)
-- [Examples](#-examples)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Support](#-support)
+> **Coming Soon**: Video demonstration of the AI Dev Team Agent in action
 
 ---
 
-## 🛠 Installation
+## 🏗️ Architecture
 
-### Prerequisites
+The extension implements a sophisticated multi-agent system with the following specialized agents:
 
-- **VS Code**: Version 1.85.0 or higher
-- **GitHub Copilot**: For LLM access (recommended)
-- **Node.js**: For JavaScript/TypeScript projects
-- **Internet Connection**: For AI model access
-
-### Install from VS Code Marketplace
-
-1. Open VS Code
-2. Go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
-3. Search for "AI Dev Team Agent"
-4. Click "Install"
-
-### Install from VSIX (Development)
-
-1. Download the latest `.vsix` file from [Releases](https://github.com/Hyoni1129/vscode-ai-dev-agent/releases)
-2. Open VS Code
-3. Run command: `Extensions: Install from VSIX...`
-4. Select the downloaded `.vsix` file
-
----
-
-## 🚀 Quick Start
-
-### 1. Create Your Project Description
-
-Create a `Project.md` file in your workspace root:
-
-```markdown
-# My Task Manager App
-
-## Description
-A modern task management web application with CRUD operations and real-time updates.
-
-## Requirements
-- React.js with TypeScript
-- Modern responsive design
-- Local storage for persistence
-- Cross-browser compatibility
-
-## Features
-- ✅ Add, edit, delete tasks
-- ✅ Mark tasks as complete/incomplete
-- ✅ Filter tasks by status
-- ✅ Search functionality
-- ✅ Dark/light theme toggle
-```
-
-### 2. Start the Automated Workflow
-
-Open VS Code Chat (Ctrl+Alt+I / Cmd+Alt+I) and type:
-
-```
-@ai-dev-team /start
-```
-
-### 3. Monitor Progress
-
-```
-@ai-dev-team /status
-```
-
-The system will automatically:
-1. **Analyze** your project requirements
-2. **Plan** the development strategy
-3. **Generate** project structure and code
-4. **Test** the implementation
-5. **Enhance** based on best practices
-6. **Iterate** until completion
-
----
-
-## 🎯 Features
-
-### 🤖 AI Agent System
-
-| Agent | Role | Capabilities |
-|-------|------|-------------|
-| **PM Agent** | Project Manager | • Requirements analysis<br>• Task breakdown<br>• Workflow coordination |
-| **Dev Agent** | Developer | • Code implementation<br>• Bug fixes<br>• Feature development |
-| **Code Tester** | QA Engineer | • Unit testing<br>• Code quality analysis<br>• Performance optimization |
-| **Enhancement Agent** | Senior Developer | • Code review<br>• Best practices implementation<br>• Architecture improvements |
-| **Web Tester** | Test Engineer | • Cross-browser testing<br>• UI/UX validation<br>• Accessibility checks |
-
-### 🔄 Automated Workflow
+<div align="center">
 
 ```mermaid
 graph TD
-    A[Project.md] --> B[PM Agent Analysis]
-    B --> C[Development Planning]
-    C --> D[Code Generation]
-    D --> E[Testing & QA]
-    E --> F[Enhancement Review]
-    F --> G[Web Testing]
-    G --> H{Quality Check}
-    H -->|Pass| I[Project Complete]
-    H -->|Fail| D
+    A[👤 User] -->|Project.md| B[💬 Chat Interface]
+    B --> C[🎯 Project Manager Agent]
+    C --> D[👨‍💻 Developer Agent]
+    D --> E[🔍 Code Tester Agent]
+    E --> F[🌐 Web Tester Agent]
+    F --> G[✨ Enhancement Agent]
+    G --> H[📦 Complete Project]
+    
+    C -.->|Dev_Checklist.md| D
+    E -.->|Code_Tester_Report.md| D
+    F -.->|Web_Tester_Report.md| D
+    G -.->|Enhancement_Report.md| C
 ```
+
+</div>
+
+### 🤖 Agent Responsibilities
+
+| Agent | Role | Responsibilities |
+|-------|------|------------------|
+| **🎯 Project Manager** | Coordinator | Project planning, task management, workflow orchestration |
+| **👨‍💻 Developer** | Code Generator | Feature implementation, bug fixes, code modifications |
+| **🔍 Code Tester** | Quality Assurance | Static analysis, error detection, completeness validation |
+| **🌐 Web Tester** | Dynamic Testing | Browser automation, user interaction simulation |
+| **✨ Enhancement** | UX/UI Specialist | Design improvements, feature suggestions, optimization |
 
 ---
 
-## 📝 Commands
+## 🚀 Getting Started
 
-| Command | Description | Usage |
-|---------|-------------|-------|
-| `/start` | Initialize and begin automated development workflow | `@ai-dev-team /start` |
+### Prerequisites
+
+- **VS Code** version 1.87.0 or higher
+- **Node.js** version 18 or higher
+- **TypeScript** 5.3.0 or higher
+
+### Installation
+
+#### Option 1: VS Code Marketplace (Coming Soon)
+1. Open VS Code
+2. Go to Extensions (`Ctrl+Shift+X`)
+3. Search for "AI Dev Team Agent"
+4. Click "Install"
+
+#### Option 2: Manual Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/ai-dev-team-agent.git
+   cd ai-dev-team-agent
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Build the extension:
+   ```bash
+   npm run compile
+   ```
+
+4. Launch VS Code and press `F5` to run the extension in a new Extension Development Host window
+
+### Quick Start
+
+1. **Create a Project Description**
+   
+   Create a `Project.md` file in your workspace root:
+   ```markdown
+   # Task Manager Web App
+   
+   Create a simple task management application with the following features:
+   
+   ## Core Features
+   - Add new tasks with a text input
+   - Display tasks in a list
+   - Mark tasks as completed
+   - Delete tasks with a delete button  
+   - Save tasks to localStorage
+   
+   ## Technical Requirements
+   - Pure HTML, CSS, and JavaScript
+   - Responsive design
+   - Modern, clean UI
+   ```
+
+2. **Start the AI Development Team**
+   
+   Open VS Code Chat (`Ctrl+Alt+I`) and type:
+   ```
+   @ai-dev-team /start
+   ```
+
+3. **Monitor Progress**
+   
+   Check the workflow status anytime:
+   ```
+   @ai-dev-team /status
+   ```
+
+4. **Get Your Complete Project**
+   
+   The AI team will generate all necessary files and provide a fully functional application!
+
+---
+
+## 💬 Chat Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/start` | Begin automated development workflow | `@ai-dev-team /start` |
 | `/status` | Check current workflow status and progress | `@ai-dev-team /status` |
-| `/resume` | Resume interrupted workflow from last checkpoint | `@ai-dev-team /resume` |
+| `/resume` | Resume an interrupted workflow | `@ai-dev-team /resume` |
 | `/reset` | Reset workflow state and start fresh | `@ai-dev-team /reset` |
 
 ---
 
-## ⚙️ Configuration
+## 📋 Workflow Phases
+
+### 1. 🎯 Initial Planning
+- Analyzes your `Project.md` requirements
+- Creates comprehensive development checklist
+- Estimates project scope and timeline
+
+### 2. 👨‍💻 Core Development  
+- Generates project structure
+- Implements all specified features
+- Creates HTML, CSS, JavaScript files
+- Handles package.json and dependencies
+
+### 3. 🔍 Code Testing
+- Performs static code analysis
+- Identifies syntax errors and logical issues
+- Validates feature completeness
+- Generates detailed test reports
+
+### 4. 🛠️ Bug Fixing
+- Reviews test reports
+- Automatically fixes identified issues
+- Validates fixes before proceeding
+
+### 5. ✨ Enhancement Review
+- Analyzes completed project
+- Suggests UI/UX improvements
+- Recommends additional features
+- Provides implementation guidance
+
+### 6. 🚀 Final Implementation
+- Applies enhancement suggestions
+- Optimizes performance
+- Ensures cross-browser compatibility
+- Delivers production-ready code
+
+---
+
+## 🛠️ Configuration
 
 Configure the extension through VS Code settings:
 
@@ -169,132 +206,131 @@ Configure the extension through VS Code settings:
 {
   "aiDevTeam.defaultModel": "copilot-gpt-4",
   "aiDevTeam.enableWebTesting": true,
-  "aiDevTeam.maxTokensPerRequest": 4000
+  "aiDevTeam.maxRetries": 3,
+  "aiDevTeam.tokenOptimization": true
 }
 ```
 
 ### Available Settings
 
-- **`aiDevTeam.defaultModel`**: Default LLM model for agents
-- **`aiDevTeam.enableWebTesting`**: Enable/disable web testing with Playwright
-- **`aiDevTeam.maxTokensPerRequest`**: Maximum tokens per LLM request
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `defaultModel` | LLM model to use for agents | `"copilot-gpt-4"` |
+| `enableWebTesting` | Enable Playwright web testing | `true` |
+| `maxRetries` | Maximum retry attempts for failed operations | `3` |
+| `tokenOptimization` | Enable token usage optimization | `true` |
 
 ---
 
-## 📚 Examples
+## 📊 Project Examples
 
-### Web Application Example
-
+### 🎮 Game Development
 ```markdown
-# E-commerce Store
+# Snake Game
 
-## Description
-A full-featured e-commerce platform with user authentication and payment processing.
+Create a classic Snake game using HTML5 Canvas and JavaScript.
 
-## Tech Stack
-- Frontend: Next.js, TailwindCSS
-- Backend: Node.js, Express
-- Database: MongoDB
-- Authentication: JWT
-
-## Features
-- User registration/login
-- Product catalog with search
-- Shopping cart functionality
-- Order management
-- Payment integration
+Features:
+- Snake movement with arrow keys
+- Food generation and collision detection
+- Score tracking
+- Game over screen
+- Responsive design
 ```
 
-### API Service Example
-
+### 📱 Web Application
 ```markdown
-# REST API Service
+# Weather Dashboard
 
-## Description
-A scalable REST API for managing user data with authentication and rate limiting.
+Build a weather dashboard that shows current conditions and forecasts.
 
-## Requirements
-- Node.js with Express
-- PostgreSQL database
-- Redis for caching
-- JWT authentication
-- API documentation
-
-## Endpoints
-- POST /auth/login
-- GET /users
-- PUT /users/:id
-- DELETE /users/:id
+Features:
+- Current weather display
+- 5-day forecast
+- Location search
+- Responsive grid layout
+- Dark/light theme toggle
 ```
 
-More examples available in the [`examples/`](examples/) directory.
+### 🛒 E-commerce
+```markdown
+# Product Catalog
+
+Create a product catalog with shopping cart functionality.
+
+Features:
+- Product grid display
+- Add to cart functionality
+- Cart management
+- Responsive design
+- Product filtering
+```
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions from the community! Here's how you can help:
 
 ### Development Setup
 
-```bash
-# Clone the repository
-git clone https://github.com/Hyoni1129/vscode-ai-dev-agent.git
-cd vscode-ai-dev-agent
+1. **Fork the repository**
+2. **Clone your fork:**
+   ```bash
+   git clone https://github.com/yourusername/ai-dev-team-agent.git
+   cd ai-dev-team-agent
+   ```
 
-# Install dependencies
-npm install
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-# Compile the extension
-npm run compile
+4. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-# Run in development mode
-# Press F5 to launch Extension Development Host
-```
+5. **Make your changes and test thoroughly**
 
-### Code of Conduct
+6. **Submit a pull request**
 
-This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md).
+### Code Style
+
+- Follow TypeScript best practices
+- Use meaningful variable and function names
+- Add comprehensive comments for complex logic
+- Ensure all tests pass before submitting
+
+### Issues and Bug Reports
+
+Found a bug? Have a feature request? Please create an issue with:
+
+- Clear description of the problem/feature
+- Steps to reproduce (for bugs)
+- Expected vs actual behavior
+- Environment details (VS Code version, OS, etc.)
 
 ---
 
-## 📄 License
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🆘 Support
+## 🙏 Acknowledgments
 
-### Documentation
+- **VS Code Team** - For the excellent extension API
+- **OpenAI** - For the powerful language models
+- **Playwright Team** - For browser automation capabilities
+- **TypeScript Team** - For the robust type system
 
-- [User Guide](docs/guides/user-guide.md)
-- [API Documentation](docs/api/README.md)
-- [Development Guide](docs/DEVELOPMENT.md)
-
-### Community
-
-- 🐛 [Report Issues](https://github.com/Hyoni1129/vscode-ai-dev-agent/issues)
-- 💡 [Feature Requests](https://github.com/Hyoni1129/vscode-ai-dev-agent/issues/new?template=feature_request.md)
-- 💬 [Discussions](https://github.com/Hyoni1129/vscode-ai-dev-agent/discussions)
-
-
-### 👨‍💻 Developer
+---
+## 👨‍💻 Developer
 
 **JeongHan Lee**
 - Email: Team.Stella.Global@gmail.com
----
-
-## 🏆 Acknowledgments
-
-- Thanks to the VS Code team for the excellent extension API
-- GitHub Copilot for powering our AI capabilities
-- The open-source community for inspiration and feedback
 
 ---
 
-<div align="center">
-  <strong>Made with ❤️ by the AI Dev Team Agent Community</strong>
-  
-  [⭐ Star us on GitHub](https://github.com/Hyoni1129/vscode-ai-dev-agent) | [📝 Documentation](docs/) | [🚀 Get Started](#-quick-start)
-</div>
