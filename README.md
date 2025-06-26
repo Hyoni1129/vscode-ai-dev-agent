@@ -31,17 +31,6 @@
     <em>Automated Development Workflow Powered by AI Agents</em>
     <br />
     <strong>« Part of the Stella Open Source Project »</strong>
-    <br />
-    <br />
-    <a href="https://github.com/JeongHanLee/VSCODE_Agent_Extension"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/JeongHanLee/VSCODE_Agent_Extension">View Demo</a>
-    ·
-    <a href="https://github.com/JeongHanLee/VSCODE_Agent_Extension/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/JeongHanLee/VSCODE_Agent_Extension/issues">Request Feature</a>
-  </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
