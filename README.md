@@ -258,7 +258,7 @@ Before you begin, ensure you have the following installed:
 
 </div>
 
-### � Available Commands
+### 💻 Available Commands
 
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -270,7 +270,7 @@ Before you begin, ensure you have the following installed:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
-## �️ Roadmap
+## 🛠️ Roadmap
 
 - [x] �️ Multi-Agent Architecture
 - [x] 💬 VS Code Chat Integration
