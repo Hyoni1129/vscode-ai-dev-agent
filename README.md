@@ -17,8 +17,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![CC BY-NC-SA 4.0 License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 </div>
 
 <!-- PROJECT LOGO -->
@@ -356,25 +354,25 @@ Under the following terms:
 - **NonCommercial** — You may not use the material for commercial purposes
 - **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+---
 
-<!-- CONTACT -->
-## � Contact
+## 👨‍💻 Developer
 
-**JEONGHAN LEE** - Creator & Lead Developer
+<div align="center">
 
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Email][email-shield]][email-url]
-[![GitHub][github-shield]][github-url]
+**JeongHan Lee**
 
-**Project Links:**
-- 🌟 Project Link: [https://github.com/JeongHanLee/VSCODE_Agent_Extension](https://github.com/JeongHanLee/VSCODE_Agent_Extension)
-- 🎯 Stella Project: [https://github.com/JeongHanLee/Stella](https://github.com/JeongHanLee/Stella)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Hyoni1129)
 
+*Passionate about AI, web development, and open source projects*
+
+</div>
+
+---
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-## � Acknowledgments
+## Acknowledgments
 
 Special thanks to the amazing tools and communities that made this project possible:
 
